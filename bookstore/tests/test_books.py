@@ -89,4 +89,3 @@ class TestBooks(BaseTestCase):
         delete_url = f'{self.books_url}{book_id}/'
         response = self.client.delete(delete_url)
         self.assertEqual(response.status_code, 204)
-    
