@@ -1,4 +1,5 @@
 from rest_framework.test import APITestCase, APIClient
+from django.urls import reverse
 
 
 class BaseTestCase(APITestCase):
@@ -6,6 +7,7 @@ class BaseTestCase(APITestCase):
         self.client = APIClient()
         self.register_url = '/auth/registration/'
         self.login_url = '/auth/login/'
+        self.books_url = reverse('books')
         self.signup_data = {
             'username': 'test',
             'email': 'tester@wookie.com',
@@ -18,4 +20,13 @@ class BaseTestCase(APITestCase):
             'email': 'tester@wookie.com',
             'password': 'test12346&'
         }
+
+        return super().setUp()
+
+
+    def login(self, data):
+        return self.client.post(self.login_url, data)
+
+    def register(self, data):
+        return self.client.post(self.register_url, data)
 

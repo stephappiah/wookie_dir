@@ -3,6 +3,6 @@ from django.urls import path
 from .views import BooksAPIView
 
 urlpatterns = [
-    path('', BooksAPIView.as_view()),
-    path('<int:pk>/', BooksAPIView.as_view()),
+    path('', BooksAPIView.as_view(), name='books'),
+    path('<int:pk>/', BooksAPIView.as_view(), name='books'),
 ]

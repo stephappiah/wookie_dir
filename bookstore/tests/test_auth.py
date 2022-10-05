@@ -3,9 +3,6 @@ from .common import BaseTestCase
 
 class TestAuth(BaseTestCase):
 
-    def register(self, data):
-        return self.client.post(self.register_url, data)
-
     def test_registration(self):
         response = self.register(self.signup_data)
         self.assertEqual(response.status_code, 201)
@@ -20,9 +17,6 @@ class TestAuth(BaseTestCase):
         data['password1'] = 'wrong'
         response = self.register(data)
         self.assertEqual(response.status_code, 400)
-
-    def login(self, data):
-        return self.client.post(self.login_url, data)
 
     def test_login(self):
         self.register(self.signup_data)
