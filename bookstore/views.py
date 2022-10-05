@@ -1,3 +1,4 @@
+from typing import OrderedDict
 from rest_framework.response import Response
 from rest_framework import generics
 from .serializers import BookSerializer
@@ -27,9 +28,10 @@ class BooksAPIView(generics.RetrieveUpdateDestroyAPIView):
         return self.get_queryset(), True
 
     def post(self, request, *args, **kwargs):
-        data = request.data
+        data = OrderedDict()
+        data.update(request.data)
         data['author'] = request.user.id
-        serializer = self.serializer_class(data=request.data)
+        serializer = self.serializer_class(data=data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=201)
