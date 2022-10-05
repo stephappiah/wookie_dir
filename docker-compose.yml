@@ -1,0 +1,26 @@
+version: '2'
+
+services:
+  postgres:
+    image: postgres:9.6
+    restart: always
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_DB=wookie
+      - POSTGRES_USER=wookie
+      - POSTGRES_PASSWORD=engineer
+    ports:
+      - "5432:5432"
+  web:
+    image: web
+    build: ./
+    command: >
+      sh -c "python ./manage.py runserver 0.0.0.0:8000"
+    restart: always
+    volumes:
+      - ./:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+
