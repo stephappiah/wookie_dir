@@ -15,6 +15,12 @@ class BaseTestCase(APITestCase):
             'password2': 'test12346&'
         }
 
+        self.book_data = {
+            'title': 'test',
+            'description': 'test',
+            'price': 100
+        }
+
         self.login_data = {
             'username': 'test',
             'email': 'tester@wookie.com',

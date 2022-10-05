@@ -12,11 +12,6 @@ class TestBooks(BaseTestCase):
         token = data['access_token']
         self.author_id = data['user']['pk']
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {token}')
-        self.book_data = {
-            'title': 'test',
-            'description': 'test',
-            'price': 100
-        }
 
     def create_book(self, data):
         return self.client.post(self.books_url, data)
